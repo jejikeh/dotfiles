@@ -1,3 +1,3 @@
 # dotfiles
 
-bad dotfiles for bad man.it config --global user.name "John Doe"
+bad dotfiles for bad man.
