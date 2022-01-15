@@ -1,0 +1,81 @@
+#! /bin/sh
+pgrep -x sxhkd > /dev/null || sxhkd &
+
+# workspaces cools names
+bspc monitor -d one two three four
+
+# improved settings by bill gates
+bspc config border_width         16
+bspc config window_gap          16
+bspc config split_ratio          0.52
+bspc config borderless_monocle   true
+bspc config gapless_monocle      true
+bspc config pointer_follows_focus true
+bspc config focus_follows_pointer true
+bspc config top_padding           44
+bspc config bottom_padding        16
+
+
+# beeeep beeepppp
+xset b 0
+
+
+# poland border
+bspc config border_width                1
+bspc config focused_border_color        "#ffffff"
+bspc config normal_border_color         "#000000"
+
+
+# mouse killass touchpad cool guy
+bspc config pointer_modifier mod1
+bspc config pointer_action1 move
+bspc config pointer_action2 resize_corner
+xinput set-prop "MSFT0002:00 04F3:304B Touchpad" "libinput Tapping Enabled" 1
+xinput set-prop "MSFT0002:00 04F3:304B Touchpad" "libinput Tapping Enabled Default" 1
+xinput set-prop "MSFT0002:00 04F3:304B Touchpad" "libinput Natural Scrolling Enabled" 1
+xinput set-prop "MSFT0002:00 04F3:304B Touchpad" "libinput Natural Scrolling Enabled Default" 1
+xinput set-prop "MSFT0002:00 04F3:304B Touchpad" "libinput Disable While Typing Enabled" 0
+xinput set-prop "MSFT0002:00 04F3:304B Touchpad" "libinput Disable While Typing Enabled" 0
+
+
+
+bspc rule -a Gimp desktop='^8' state=floating follow=on
+bspc rule -a Chromium desktop='^2'
+bspc rule -a firefox desktop='^2'
+bspc rule -a mplayer2 state=floating
+bspc rule -a Yad state=floating
+bspc rule -a Kupfer.py focus=on
+bspc rule -a Screenkey manage=off
+
+#
+# Autostart
+#
+# Set display from arandr saved script
+sh ~/.screenlayout/monitor.sh &
+# Bar
+~/.config/polybar/launch.sh &
+# Notifications
+/usr/bin/dunst &
+# Polkit
+/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
+# Wallpaper
+nitrogen --restore &
+# Dex
+dex -a -s /etc/xdg/autostart/:~/.config/autostart/  
+# Picom
+picom -CGb &
+# Network Applet
+nm-applet --indicator &
+
+# Cursor
+xsetroot -cursor_name left_ptr &
+
+killall plasmashell  & 
+killall latte-dock &
+killall krunner &
+
+
+# Low battery notifier
+~/.config/bspwm/scripts/low_bat_notifier.sh
+
+
