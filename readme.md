@@ -1,3 +1,3 @@
 # dotfiles
 
-bad dotfiles for bad man.
+bad dotfiles
